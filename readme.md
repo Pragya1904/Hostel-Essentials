@@ -1,0 +1,1 @@
+An E-commerce app targetting young and oblivious hostelites
