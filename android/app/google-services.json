@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "518039453820",
+    "project_id": "essentric-hostel-essentials",
+    "storage_bucket": "essentric-hostel-essentials.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518039453820:android:e74dbe73036a36b05289f9",
+        "android_client_info": {
+          "package_name": "com.Eccentric.hostel_essentials"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518039453820-lgsg7sjr716b359esen6hr806g8eh7ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB47oseD8wZr54Hp71lEa88M93GHKPtaU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518039453820-lgsg7sjr716b359esen6hr806g8eh7ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
