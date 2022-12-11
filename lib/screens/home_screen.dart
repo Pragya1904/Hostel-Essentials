@@ -1,8 +1,9 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:hostel_essentials/components/Items.dart';
 import 'package:hostel_essentials/constants.dart';
 import 'package:hostel_essentials/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
   static const String id = 'home_screen';
@@ -13,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late SharedPreferences loginData;
-   late String email1;
+    String email1='';
   @override
   void initState() {
     super.initState();
@@ -29,35 +30,67 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Essentric',
+            style: kHeadingTextStyle,
+          ),
+          centerTitle: true,
+          elevation: 0.0,
+          backgroundColor: Colors.transparent,
+          leading:IconButton(
+            onPressed: () {
+              loginData.setBool('login', true);
+              Navigator.pushNamed(context, LoginScreen.id);
+            },
+            icon: const Icon(Icons.logout,color: Colors.black,size: 27,),
+          ),
+          actions: [
+            Badge(
+              badgeColor: Colors.pink,
+              position: BadgePosition.topEnd(top: -1,end: -0.5),
+              badgeContent: Text('0'),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 27,),
+              ),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width*0.03,
+            )
+          ],
+
+        ),
         body: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      loginData.setBool('login', true);
-                      Navigator.pushNamed(context, LoginScreen.id);
-                    },
-                    icon: Icon(Icons.logout),
-                  ),
-                  Text(
-                    'Essentric',
-                    style: kHeadingTextStyle,
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.shopping_cart),
-                  ),
-                ],
-              ),
               SizedBox(
-                height: MediaQuery.of(context).size.height*0.04,
+                height: MediaQuery.of(context).size.height*0.01,
               ),
-              Text("Welcome Back $email1"),
+              Text("Welcome $email1"),
+              SizedBox(
+                height: MediaQuery.of(context).size.height*0.01,
+              ),
+              //TODO: grid view
+              Expanded(
+                flex: 1,
+                child: Container(
+                  child: Items(),
+                ),
+              )
+              // Expanded(child: Items(),flex: 1,),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       ProductCard(),
+              //       ProductCard(),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -19,9 +19,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formkey=GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+  late SharedPreferences loginData;
   late User loggedInUser;
   bool showSpinner=false;
-  late SharedPreferences loginData;
   bool newUser=false;
   final TextEditingController emailController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
@@ -36,9 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
     newUser=(loginData.getBool('Login')??true);
     print(newUser);
     if(newUser==false)
-      {
-        Navigator.pushNamed(context, HomeScreen.id);
-      }
+    {
+      Navigator.pushNamed(context, HomeScreen.id);
+    }
   }
   void getCurrentUser()async{
     try{
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SnackBarMsg.successLoginSB;
                       loginData.setBool('login', false);
                       loginData.setString('email', emailController.text);
-                      Navigator.pushNamed(context, HomeScreen.id);
+                      Navigator.pushNamed(context, LoginScreen.id);
                     }
                     else
                     {

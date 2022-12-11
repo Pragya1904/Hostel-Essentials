@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+const kItemTextStyle=TextStyle(
+  fontWeight: FontWeight.w500,
+  fontSize: 17,
+);
 const kHeadingTextStyle=TextStyle(
   color: Colors.pink,
   fontSize: 30,

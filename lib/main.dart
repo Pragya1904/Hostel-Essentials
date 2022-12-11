@@ -2,10 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_essentials/screens/cart_screen.dart';
 import 'package:hostel_essentials/screens/home_screen.dart';
+import 'package:hostel_essentials/screens/loading_screen.dart';
 import 'package:hostel_essentials/screens/login_screen.dart';
 import 'package:hostel_essentials/screens/signup_screen.dart';
 import 'screens/welcome_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+final auth=FirebaseAuth.instance;
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -22,8 +25,9 @@ class Essentric extends StatelessWidget {
         primarySwatch:  Colors.pink,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: WelcomeScreen.id,
+      initialRoute: auth.currentUser==null?WelcomeScreen.id: LoadingScreen.id,
       routes:{
+        LoadingScreen.id:(context)=>LoadingScreen(),
         WelcomeScreen.id: (context)=>WelcomeScreen(),
         HomeScreen.id:(context)=> HomeScreen(),
         LoginScreen.id:(context)=>LoginScreen(),
