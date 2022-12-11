@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+const kHeadingTextStyle=TextStyle(
+  color: Colors.pink,
+  fontSize: 30,
+  fontWeight: FontWeight.w500,
+  shadows:[Shadow(blurRadius: 10,color: Colors.grey, offset: Offset(5.0,5.0),),],
+);
 
 const kTextFieldDecoration=InputDecoration(
   hintText: '',
