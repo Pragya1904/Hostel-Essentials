@@ -1,8 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:hostel_essentials/cart_provider.dart';
 import 'package:hostel_essentials/components/Items.dart';
 import 'package:hostel_essentials/constants.dart';
 import 'package:hostel_essentials/screens/login_screen.dart';
+import 'package:hostel_essentials/screens/welcome_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -41,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           leading:IconButton(
             onPressed: () {
               loginData.setBool('login', true);
-              Navigator.pushNamed(context, LoginScreen.id);
+              Navigator.pushNamed(context, WelcomeScreen.id);
             },
             icon: const Icon(Icons.logout,color: Colors.black,size: 27,),
           ),
@@ -49,7 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Badge(
               badgeColor: Colors.pink,
               position: BadgePosition.topEnd(top: -1,end: -0.5),
-              badgeContent: Text('0'),
+              badgeContent: Consumer<CartProvider>(
+                builder: (context,value,child){
+                  return Text(value.getCounter().toString(),style: TextStyle(color: Colors.white),);
+                },),
               child: IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 27,),
