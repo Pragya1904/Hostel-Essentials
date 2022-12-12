@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hostel_essentials/cart_provider.dart';
 import 'package:hostel_essentials/components/Items.dart';
 import 'package:hostel_essentials/constants.dart';
+import 'package:hostel_essentials/screens/cart_screen.dart';
 import 'package:hostel_essentials/screens/login_screen.dart';
 import 'package:hostel_essentials/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Text(value.getCounter().toString(),style: TextStyle(color: Colors.white),);
                 },),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, CartScreen.id);
+                },
                 icon: const Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 27,),
               ),
             ),

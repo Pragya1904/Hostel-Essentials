@@ -51,13 +51,12 @@ class _ItemsState extends State<Items> {
                             CachedNetworkImage(
                               imageUrl: ItemData.product_list[index]['image'],
                               placeholder: (context, url) =>
-                                  SizedBox(child: CircularProgressIndicator(),height: MediaQuery.of(context).size.height*0.01,),
+                                  CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>
                                   Icon(Icons.image),
                               height: MediaQuery.of(context).size.height * 0.13,
                               width: MediaQuery.of(context).size.width * 0.2,
                             ),
-                            // Image.network(ItemData.product_list[index]['image'],errorBuilder:(BuildContext context,Object exception,StackTrace st) ,height: MediaQuery.of(context).size.height*0.13,width: MediaQuery.of(context).size.width*0.2,),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.04,
                             ),
@@ -86,7 +85,7 @@ class _ItemsState extends State<Items> {
                                     alignment: Alignment.centerRight,
                                     child: ElevatedButton(
                                         onPressed: () {
-                                          print("pressed");
+
                                           dbHelper!
                                               .insert(Cart(
                                                   id: index,
@@ -96,6 +95,8 @@ class _ItemsState extends State<Items> {
                                                   image: ItemData
                                                           .product_list[index]
                                                       ['image'],
+                                                  ProductPrice:ItemData.product_list[index]['price'],
+                                                  quantity: 1,
                                                   name: ItemData
                                                           .product_list[index]
                                                       ['name']))
