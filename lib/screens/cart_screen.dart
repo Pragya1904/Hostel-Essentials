@@ -1,14 +1,17 @@
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hostel_essentials/components/RoundedButton.dart';
 import 'package:hostel_essentials/database/dbHelper.dart';
 import 'package:hostel_essentials/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../cart_provider.dart';
 import '../constants.dart';
 import '../models/Cart_model.dart';
+import 'home_screen.dart';
 
 
 class CartScreen extends StatefulWidget {
@@ -27,6 +30,9 @@ class _CartScreenState extends State<CartScreen> {
     final cart = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        leading:IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.arrow_back)),
         title: const Text(
           'Cart',
           style: kHeadingTextStyle,
@@ -34,33 +40,6 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.transparent,
-        leading:IconButton(
-          onPressed: () {
-            loginData.setBool('login', true);
-            Navigator.pushNamed(context, WelcomeScreen.id);
-          },
-          icon: const Icon(Icons.logout,color: Colors.black,size: 27,),
-        ),
-        actions: [
-          Badge(
-            badgeColor: Colors.pink,
-            position: BadgePosition.topEnd(top: -1,end: -0.5),
-            badgeContent: Consumer<CartProvider>(
-              builder: (context,value,child){
-                return Text(value.getCounter().toString(),style: TextStyle(color: Colors.white),);
-              },),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, CartScreen.id);
-              },
-              icon: const Icon(Icons.shopping_cart_outlined,color: Colors.black,size: 27,),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width*0.03,
-          )
-        ],
-
       ),
       body: Column(
         children: [
@@ -126,27 +105,6 @@ class _CartScreenState extends State<CartScreen> {
                                                 height: MediaQuery.of(context).size.height *
                                                     0.01,
                                               ),
-                                              Align(
-                                                alignment: Alignment.centerRight,
-                                                child:Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.pink,
-                                                    borderRadius: BorderRadius.circular(7)
-                                                  ),
-                                                  height: MediaQuery.of(context).size.height*0.045,
-                                                  width: MediaQuery.of(context).size.width*0.3,
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    children: [
-                                                      IconButton(onPressed: (){}, icon: Icon(Icons.remove,color: Colors.white,)),
-                                                      Text("!",style: TextStyle(color: Colors.white,fontSize: 20)),
-                                                      IconButton(onPressed: (){}, icon: Icon(Icons.add,color: Colors.white,)),
-
-                                                    ],
-                                                  ),
-                                                )
-                                              ),
-
                                             ],
                                           ),
                                         ),
@@ -158,11 +116,7 @@ class _CartScreenState extends State<CartScreen> {
                               ));
                         }));
                   }
-                else
-                  {
-                      return Text("Your Cart is so Light...Add some Products");
-                      //todo: add empty cart image and redirect the users to homescreen
-                  }
+                return const Center(child: Text("Empty Cart"));
               }
           ),
           Consumer<CartProvider>(builder: (context,value,child){
@@ -185,16 +139,44 @@ class ReusableCard extends StatelessWidget {
   final String title,value;
 
   const ReusableCard({ required this.title,required this.value});
-
+  Future<void> SPref() async{
+    SharedPreferences SPrefs=await SharedPreferences.getInstance();
+    SPrefs.remove('cart_item');
+    SPrefs.remove('total_price');
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical:4 ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title,style: kItemTextStyle,),
-            Text("₹$value",style: kItemTextStyle,),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(title,style: kItemTextStyle,),
+                Text("₹$value",style: kItemTextStyle,),
+            ],
+          ),
+          RoundedButton1(onPressed: (){
+            showDialog(context: context, builder: (context)=>AlertDialog(
+              content:SizedBox(
+                height: 50,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text("Ordered Successfully!!",style: TextStyle(fontSize: 24),),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: TextButton(onPressed: (){
+                    SPref();
+                    Navigator.pushNamed(context, HomeScreen.id);
+                    }, child:const Text("Take Me To Home Page",style: TextStyle(fontSize: 14,color: Colors.pink),)),
+                )
+              ],
+              backgroundColor: Colors.white,
+            ));
+          },title1:"Pay ₹$value ",colour: Colors.pink,)
         ],
       ),
     );

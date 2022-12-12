@@ -54,22 +54,27 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                         child: Image.asset('assets/images/logo.png'),
                       ),
                     ),
-                     DefaultTextStyle(
-                       style: TextStyle(
-                           color: Colors.grey[500],
-                           fontSize: 45,
-                           fontWeight: FontWeight.w900),
-                       child: AnimatedTextKit(animatedTexts: [
-                         RotateAnimatedText(
-                           'ESSENTRIC',
+                     Container(
+                       height: 100,
+                       width: 600,
+                       child: DefaultTextStyle(
+                         style: TextStyle(
+                             color: Colors.grey[500],
+                             fontSize: 45,
+                             fontWeight: FontWeight.w900),
+                         child: AnimatedTextKit(animatedTexts: [
+                           RotateAnimatedText(
+                             'ESSENTRIC',
+                           ),
+                           RotateAnimatedText('Hostel Essentials',textStyle: TextStyle(fontSize: 30) ),
+                         ],
+                           repeatForever: true,
                          ),
-                         RotateAnimatedText('Hostel Essentials',textStyle: TextStyle(fontSize: 30) ),
-                       ],
-                         repeatForever: true,
                        ),
                      ),
                   // AnimatedTextKit(animatedTexts:[RotateAnimatedText('Essentric'),RotateAnimatedText('Hostel Essentials')],
                   // ),
+
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, LoginScreen.id);

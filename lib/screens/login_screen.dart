@@ -34,7 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void isLoggedIn() async{
     loginData=await SharedPreferences.getInstance();
     newUser=(loginData.getBool('Login')??true);
-    print(newUser);
     if(newUser==false)
     {
       Navigator.pushNamed(context, HomeScreen.id);
@@ -137,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SnackBarMsg.successLoginSB;
                       loginData.setBool('login', false);
                       loginData.setString('email', emailController.text);
-                      Navigator.pushNamed(context, LoginScreen.id);
+                      Navigator.pushNamed(context, HomeScreen.id);
                     }
                     else
                     {

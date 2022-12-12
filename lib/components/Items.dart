@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hostel_essentials/cart_provider.dart';
 import 'package:hostel_essentials/database/dbHelper.dart';
 import 'package:hostel_essentials/models/Cart_model.dart';
-import 'package:hostel_essentials/models/Product_model.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import 'package:hostel_essentials/models/itemData.dart';
@@ -51,9 +49,9 @@ class _ItemsState extends State<Items> {
                             CachedNetworkImage(
                               imageUrl: ItemData.product_list[index]['image'],
                               placeholder: (context, url) =>
-                                  CircularProgressIndicator(),
+                                  const CircularProgressIndicator(),
                               errorWidget: (context, url, error) =>
-                                  Icon(Icons.image),
+                                  const Icon(Icons.image),
                               height: MediaQuery.of(context).size.height * 0.13,
                               width: MediaQuery.of(context).size.width * 0.2,
                             ),
@@ -101,7 +99,9 @@ class _ItemsState extends State<Items> {
                                                           .product_list[index]
                                                       ['name']))
                                               .then((value) {
-                                            print("Product added to cart");
+                                            if (kDebugMode) {
+                                              print("Product added to cart");
+                                            }
                                             cart.addTotalPrice(double.parse(
                                                 ItemData.product_list[index]
                                                         ['price']

@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hostel_essentials/cart_provider.dart';
 import 'package:hostel_essentials/components/Items.dart';
@@ -43,8 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0.0,
           backgroundColor: Colors.transparent,
           leading:IconButton(
-            onPressed: () {
+            onPressed: () async{
               loginData.setBool('login', true);
+              await FirebaseAuth.instance.signOut();
               Navigator.pushNamed(context, WelcomeScreen.id);
             },
             icon: const Icon(Icons.logout,color: Colors.black,size: 27,),
@@ -89,17 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Items(),
                 ),
               )
-              // Expanded(child: Items(),flex: 1,),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       ProductCard(),
-              //       ProductCard(),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),

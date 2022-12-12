@@ -7,7 +7,7 @@ class DBHelper{
   static Database? _db;
 
   Future<Database?> get db async {
-    await deleteDatabase();
+  //  await deleteDatabase();
       if(_db!=null)
         {
           return _db!;
