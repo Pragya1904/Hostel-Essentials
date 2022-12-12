@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hostel_essentials/cart_provider.dart';
+import 'package:hostel_essentials/provider/cart_provider.dart';
 import 'package:hostel_essentials/components/Items.dart';
 import 'package:hostel_essentials/constants.dart';
 import 'package:hostel_essentials/screens/cart_screen.dart';
@@ -84,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height*0.01,
               ),
-              //TODO: grid view
               Expanded(
                 flex: 1,
                 child: Container(

@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hostel_essentials/cart_provider.dart';
+import 'package:hostel_essentials/provider/cart_provider.dart';
 import 'package:hostel_essentials/screens/cart_screen.dart';
 import 'package:hostel_essentials/screens/home_screen.dart';
 import 'package:hostel_essentials/screens/loading_screen.dart';

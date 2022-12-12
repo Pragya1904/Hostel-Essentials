@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:hostel_essentials/cart_provider.dart';
+import 'package:hostel_essentials/provider/cart_provider.dart';
 import 'package:hostel_essentials/database/dbHelper.dart';
 import 'package:hostel_essentials/models/Cart_model.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,6 @@ class _ItemsState extends State<Items> {
   @override
   void initState() {
     ItemData.getData();
-    // TODO: implement initState
     super.initState();
   }
 

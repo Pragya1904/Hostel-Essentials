@@ -1,4 +1,4 @@
-//Todo : create a static class and implement provider
+/// create a static class and implement provider
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 final _firestore=FirebaseFirestore.instance;
